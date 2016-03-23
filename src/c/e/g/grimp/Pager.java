@@ -5,7 +5,7 @@ import java.util.Map;
 /**
  * @File Name : Pager.java
  * @Project Name : grimp
- * @package Name : com.ese.grid.xGrid
+ * @package Name : c.e.g.xGrid
  * @create Date : 2016. 2. 24.
  * @explain : 페이징 처리 
  * @made by : "GOEDOKID"
@@ -19,6 +19,10 @@ public class Pager {
 	 * @explain : 페이징 처리 메서드 
 	 * @param : int pageNo(페이지 번호), int pageSize(페이지 크기), int totalCnt(조회된 전체크기)
 	 * @return : Integer[]
+	 *           [0]. startNum 시작번호
+	 *           [1]. endNum 종료번호
+	 *           [2]. pageCnt 페이지 개수
+	 *           [3]. totalCnt 총 로우 수
 	 */
 	public static Integer[] paging(int pageNo, int pageSize, int totalCnt) {
 		Integer[] paging = new Integer[3];
@@ -31,10 +35,10 @@ public class Pager {
 		
 		int endNum = startNum+pageSize-1;
 		
-		paging[1] = startNum;
-		paging[2] = endNum;
-		paging[3] = pageCnt;
-		paging[4] = totalCnt;
+		paging[0] = startNum;
+		paging[1] = endNum;
+		paging[2] = pageCnt;
+		paging[3] = totalCnt;
 		
 		return paging;
 	}
@@ -45,7 +49,12 @@ public class Pager {
 	 * @made by : "GOEDOKID"
 	 * @explain : Map<String, Object> 형태의 페이징 처리 
 	 * @param : Map<String, String> Map, int totalCnt
-	 * @return : Map<String,Object>
+	 * @return : Map<String,Object> 
+	 *           1. 사용자가 넣은 검색 조건
+	 *           2. startNum 시작번호
+	 *           3. endNum 종료번호
+	 *           4. pageCnt 페이지 개수
+	 *           5. totalCnt 총 로우 수
 	 */
 	public static Map<String, Object> paging(Map<String, Object> map, int totalCnt) {
 		

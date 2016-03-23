@@ -1,6 +1,16 @@
 package c.e.g.exception;
 import java.util.logging.Logger;
 
+/**
+ * @File Name : GrimpExceptionHandler.java
+ * @Project Name : grimp-component
+ * @package Name : c.e.g.exception
+ * @create Date : 2016. 3. 23.
+ * @explain : Exception Handler
+ *            발생하는 모든 익셉션 종류를 모아놓고 처리 
+ *            try catch 구문이 광범위 해서 라인까지 찾긴 힘듬 
+ * @made by : "GOEDOKID"
+ */
 @SuppressWarnings("serial")
 public class GrimpExceptionHandler extends Exception{
 

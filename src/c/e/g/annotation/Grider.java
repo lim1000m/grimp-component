@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @File Name : Grider.java
  * @Project Name : grimp
- * @package Name : com.ese.grid.annotation
+ * @package Name : c.e.g.annotation
  * @create Date : 2016. 3. 2.
  * @explain : domain 객체 axisj 사용환경에 맞게 annotation을 설정하는 클래스 
  * @made by : "GOEDOKID"
