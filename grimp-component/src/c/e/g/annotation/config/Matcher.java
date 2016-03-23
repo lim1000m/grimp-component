@@ -8,7 +8,7 @@ import java.lang.annotation.Target;
 /**
  * @File Name : Matcher.java
  * @Project Name : grimp
- * @package Name : com.ese.grid.annotation.config
+ * @package Name : c.e.g.annotation.config
  * @create Date : 2016. 2. 29.
  * @explain : Grider Format 설정이 function일 경우 function인 변수에 선언된 배열 정보에 매핑될 문자열
  * 			  EX) 국제화 메세지, 동일한 ROW 레벨의 다른 컬럼 값  

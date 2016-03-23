@@ -15,7 +15,7 @@ import c.e.g.annotation.config.Matcher;
 /**
  * @File Name : GrimpUtil.java
  * @Project Name : grimp
- * @package Name : com.ese.grid.xGrid.extend
+ * @package Name : c.e.g.xGrid.extend
  * @create Date : 2016. 3. 4.
  * @explain : AxisJ Grid 컴포넌트에 사용되는 함수 
  * @made by : "GOEDOKID"
