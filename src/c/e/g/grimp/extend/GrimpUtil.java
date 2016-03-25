@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import org.springframework.context.MessageSource;
 import org.springframework.web.context.WebApplicationContext;
 
+import c.e.g.annotation.Gentity;
 import c.e.g.annotation.config.Gid;
 import c.e.g.annotation.config.Matcher;
 
@@ -255,6 +256,35 @@ public class GrimpUtil {
 				keyVar = fieldList[i].getName();
 		}
 		return keyVar;
+	}
+	
+	/**
+	 * @Method Name : getLabelMessage
+	 * @create Date : 2016. 3. 25.
+	 * @made by : "GOEDOKID"
+	 * @explain : 국제화 메세지 설정된 prefix와 suffix를 붙여서 조회 
+	 *            label을 셋팅하지 않을 경우 fieldName으로 prefix와 suffix를 붙여서 조회
+	 * @param : 
+	 * @return : String
+	 */
+	protected String getLabelMessage(Gentity gentity, String label, String fieldName) {
+		
+		String labelStr = "";
+		String prefix = "";
+		String suffix = "";
+		
+		if(gentity.msgPrefix() != "")
+			prefix = gentity.msgPrefix()+".";
+		
+		if(gentity.msgSuffix() != "")
+			suffix = "."+gentity.msgSuffix();
+		
+		if(label != null)
+			labelStr = prefix+label+suffix;
+		else
+			labelStr = prefix+fieldName+suffix;
+		
+		return this.message.getMessage(labelStr, new String[]{}, labelStr, locale);
 	}
 	
 }
