@@ -25,7 +25,7 @@ public class Pager {
 	 *           [3]. totalCnt 총 로우 수
 	 */
 	public static Integer[] paging(int pageNo, int pageSize, int totalCnt) {
-		Integer[] paging = new Integer[3];
+		Integer[] paging = new Integer[4];
 		
 		int pageCnt = totalCnt/pageSize;
 		if(pageCnt == 0) pageCnt = 1;
@@ -39,6 +39,40 @@ public class Pager {
 		paging[1] = endNum;
 		paging[2] = pageCnt;
 		paging[3] = totalCnt;
+		
+		return paging;
+	}
+	
+	/**
+	 * @Method Name : paging
+	 * @create Date : 2016. 2. 24.
+	 * @made by : "GOEDOKID"
+	 * @explain : 페이징 처리 메서드 
+	 * @param : String pageNoStr(페이지 번호), String pageSizeStr(페이지 크기), int totalCnt(조회된 전체크기)
+	 * @return : String[]
+	 *           [0]. startNum 시작번호
+	 *           [1]. endNum 종료번호
+	 *           [2]. pageCnt 페이지 개수
+	 *           [3]. totalCnt 총 로우 수
+	 */
+	public static String[] paging(String pageNoStr, String pageSizeStr, int totalCnt) {
+		String[] paging = new String[4];
+		
+		Integer pageNo = Integer.parseInt(pageNoStr);
+		Integer pageSize = Integer.parseInt(pageSizeStr);
+		
+		int pageCnt = totalCnt/pageSize;
+		if(pageCnt == 0) pageCnt = 1;
+		
+		int startNum = 1;
+		if(pageNo > 1) startNum = (pageNo-1)*pageSize;
+		
+		int endNum = startNum+pageSize-1;
+		
+		paging[0] = Integer.toString(startNum);
+		paging[1] = Integer.toString(endNum);
+		paging[2] = Integer.toString(pageCnt);
+		paging[3] = Integer.toString(totalCnt);
 		
 		return paging;
 	}
@@ -76,6 +110,5 @@ public class Pager {
 		
 		return map;
 	}
-	
 }
  

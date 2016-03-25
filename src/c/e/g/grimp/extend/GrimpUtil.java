@@ -264,7 +264,7 @@ public class GrimpUtil {
 	 * @made by : "GOEDOKID"
 	 * @explain : 국제화 메세지 설정된 prefix와 suffix를 붙여서 조회 
 	 *            label을 셋팅하지 않을 경우 fieldName으로 prefix와 suffix를 붙여서 조회
-	 * @param : 
+	 * @param : Gentity Annotation Class, String label, String filedName
 	 * @return : String
 	 */
 	protected String getLabelMessage(Gentity gentity, String label, String fieldName) {
@@ -273,13 +273,14 @@ public class GrimpUtil {
 		String prefix = "";
 		String suffix = "";
 		
-		if(gentity.msgPrefix() != "")
+		if(gentity != null) {
+		if(!gentity.msgPrefix().isEmpty())
 			prefix = gentity.msgPrefix()+".";
+		if(!gentity.msgSuffix().isEmpty()) 
+			suffix = "."+gentity.msgSuffix();	
+		}
 		
-		if(gentity.msgSuffix() != "")
-			suffix = "."+gentity.msgSuffix();
-		
-		if(label != null)
+		if(!label.isEmpty()) 
 			labelStr = prefix+label+suffix;
 		else
 			labelStr = prefix+fieldName+suffix;
