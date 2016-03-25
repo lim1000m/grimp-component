@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import c.e.g.annotation.Gentity;
 import c.e.g.annotation.Grider;
 import c.e.g.annotation.Grider.Format;
 import c.e.g.annotation.Grider.Sort;
@@ -223,15 +224,16 @@ public class Grimp extends GrimpUtil {
 		ObjectMapper mapper = new ObjectMapper();
 		String jsonResult = "";
 		
+		Gentity gentity = cls.getAnnotation(Gentity.class);
+		
 		try {
 		
 			for (int i = 0; i < fields.length; i++) {
 				Grider grider = fields[i].getAnnotation(Grider.class);
-				
 				if(grider != null) {
 					Map<String, Object> map  = new HashMap<String, Object>();
 					map.put("key", fields[i].getName());
-					map.put("label", getMessage(grider.label()));
+					map.put("label", getLabelMessage(gentity, grider.label(), fields[i].getName()));
 					map.put("display", grider.display());
 					map.put("align", grider.align());
 					map.put("width", grider.width());
