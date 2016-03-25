@@ -175,20 +175,35 @@ public class Grimp extends GrimpUtil {
 		String grimpRst = "";
 		
 		try {
-			if(this.exprType.equals(ExprType.GRID)) {
-				if(this.dataType.equals(DataType.JSON))
-					if(cls != null)
-						grimpRst = getJsonToGridMap(grivo, cls);
-					else 
-						grimpRst = getJsonToGridDomain(grivo);
-				else
-					grimpRst = getXmlToGrid(grivo);
+			if(!grivo.getIsEmptyGrid()) {
+				if(this.exprType.equals(ExprType.GRID)) {
+					if(this.dataType.equals(DataType.JSON))
+						if(cls != null)
+							grimpRst = getJsonToGridMap(grivo, cls);
+						else 
+							grimpRst = getJsonToGridDomain(grivo);
+					else
+						grimpRst = getXmlToGrid(grivo);
+				} else {
+					if(this.dataType.equals(DataType.JSON))
+						grimpRst = getJsonToTree(grivo);
+					else
+						grimpRst = getXmlToTree(grivo);
+				}	
 			} else {
-				if(this.dataType.equals(DataType.JSON))
-					grimpRst = getJsonToTree(grivo);
-				else
-					grimpRst = getXmlToTree(grivo);
+				if(this.exprType.equals(ExprType.GRID)) {
+					if(this.dataType.equals(DataType.JSON))
+						grimpRst = getEmptyJson();
+					else
+						grimpRst =  getEmptyXml();
+				} else {
+					if(this.dataType.equals(DataType.JSON))
+						grimpRst =  getEmptyTreeJson();
+					else
+						grimpRst =  getEmptyTreeXml();
+				}	
 			}
+			
 		
 		} catch (JsonProcessingException e) {
 			throw new GrimpExceptionHandler(GrimpError.JPE, e);
@@ -499,5 +514,71 @@ public class Grimp extends GrimpUtil {
 			e.printStackTrace();
 		}
 		return returnStr;
+	}
+	
+	/**
+	 * @Method Name : getEmptyJson
+	 * @create Date : 2016. 3. 25.
+	 * @made by : "GOEDOKID"
+	 * @explain : 최초나 어떤 이유에 의해서 빈 Grid를 보여줘야 할 필요가 있을 경우 JSON 형태의 빈 데이터를 리턴한다.
+	 * @param : 
+	 * @return : String
+	 */
+	private String getEmptyJson() throws GrimpExceptionHandler  {
+		Map<String, Object> grimpMap = new HashMap<String, Object>(); //최종 JSON 형태를 생성하는 grimpMap
+		ArrayList<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>(); //데이터 정보를 생성하는 MAP
+		Map<String, Integer> pageMap = new HashMap<String, Integer>(); //페이지 정보를 생성하는 MAP
+		String mapperJson = ""; //최종 JSON 리턴
+		pageMap.put("pageNo", 1); 
+		pageMap.put("pageCount", 0); 
+		pageMap.put("listCount", 0); 
+		grimpMap.put("list", dataList);
+		grimpMap.put("page", pageMap);
+		ObjectMapper mapper = new ObjectMapper();
+		try {
+			mapperJson = mapper.writeValueAsString(grimpMap);
+		} catch (JsonProcessingException e) {
+			throw new GrimpExceptionHandler(GrimpError.JPE, e);
+		}
+		return mapperJson;
+	}
+	
+	/**
+	 * @Method Name : getEmptyXml
+	 * @create Date : 2016. 3. 25.
+	 * @made by : "GOEDOKID"
+	 * @explain : 빈 Grid를 최초에 호출해야 할 필요가 있을때 XML 형태의 빈 데이터를 리턴한다.
+	 * @param : String
+	 * @return : String
+	 */
+	@Deprecated
+	private String getEmptyXml() {
+		return "";
+	}
+	
+	/**
+	 * @Method Name : getEmptyTreeXml
+	 * @create Date : 2016. 3. 25.
+	 * @made by : "GOEDOKID"
+	 * @explain : 빈 Tree를 최초에 호출해야 할 필요가 있을때 XML 형태의 빈 데이터를 리턴한다.
+	 * @param : String
+	 * @return : String
+	 */
+	@Deprecated
+	private String getEmptyTreeXml() {
+		return "";
+	}
+	
+	/**
+	 * @Method Name : getEmptyTreeJson
+	 * @create Date : 2016. 3. 25.
+	 * @made by : "GOEDOKID"
+	 * @explain : 빈 Tree를 최초에 호출해야 할 필요가 있을때 XML 형태의 빈 데이터를 리턴한다.
+	 * @param : String
+	 * @return : String
+	 */
+	@Deprecated
+	private String getEmptyTreeJson() {
+		return "";
 	}
 }

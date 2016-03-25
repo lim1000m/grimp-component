@@ -22,6 +22,16 @@ public class Grivo {
 	//Grider 형태
 	Class<?> gridCls;
 	
+	Boolean isEmptyGrid = false;
+	
+	/**
+	 * 빈 Grid를 생성할때 사용할 
+	 */
+	public Grivo(Map<String, Object> pager) {
+		this.pager = pager;
+		this.isEmptyGrid = true;
+	}
+	
 	/**
 	 * 그리보 생성자
 	 * @param pager
@@ -65,6 +75,14 @@ public class Grivo {
 
 	public void setGridCls(Class<?> gridCls) {
 		this.gridCls = gridCls;
+	}
+
+	public Boolean getIsEmptyGrid() {
+		return isEmptyGrid;
+	}
+
+	public void setIsEmptyGrid(Boolean isEmptyGrid) {
+		this.isEmptyGrid = isEmptyGrid;
 	}
 	
 }
